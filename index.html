@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Selamat Hari Raya Idul Fitri</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0b3b2f 0%, #1a6d5e 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', 'Segoe UI', 'Quicksand', system-ui, -apple-system, sans-serif;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Efek ketupat latar belakang */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-pattern::before,
+        .bg-pattern::after {
+            content: "⬨";
+            font-size: 80px;
+            position: absolute;
+            color: #ffd966;
+            animation: float 20s infinite linear;
+        }
+
+        .bg-pattern::before {
+            top: 10%;
+            left: 5%;
+            animation-duration: 25s;
+        }
+
+        .bg-pattern::after {
+            bottom: 15%;
+            right: 8%;
+            animation-duration: 30s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Kartu Utama */
+        .card {
+            position: relative;
+            z-index: 10;
+            max-width: 550px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(2px);
+            border-radius: 58px;
+            box-shadow: 0 35px 68px rgba(0, 0, 0, 0.3), 0 15px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            text-align: center;
+            padding: 30px 25px 45px;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .card:hover {
+            transform: scale(1.01);
+        }
+
+        /* Ornamen Ketupat Atas */
+        .ketupat-deco {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .ketupat {
+            width: 50px;
+            height: 50px;
+            background: #c9a53b;
+            position: relative;
+            transform: rotate(45deg);
+            border-radius: 8px 0 8px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .ketupat:before,
+        .ketupat:after {
+            content: "";
+            position: absolute;
+            background: #f7e05e;
+        }
+
+        .ketupat:before {
+            width: 70%;
+            height: 4px;
+            top: 50%;
+            left: 15%;
+            transform: translateY(-50%);
+            border-radius: 2px;
+        }
+
+        .ketupat:after {
+            width: 4px;
+            height: 70%;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .ketupat:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            background: #e6b422;
+        }
+
+        /* Bulan & Bintang */
+        .moon-star {
+            font-size: 70px;
+            line-height: 1;
+            margin: 10px 0 5px;
+            color: #f3b33d;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: gentleGlow 3s infinite alternate;
+        }
+
+        @keyframes gentleGlow {
+            0% { text-shadow: 0 0 2px #ffd966, 0 0 5px #ffb347; opacity: 0.9;}
+            100% { text-shadow: 0 0 15px #ffe69e, 0 0 20px #ffaa33; opacity: 1;}
+        }
+
+        /* Teks Utama */
+        h1 {
+            font-size: 2.2rem;
+            color: #1e4a3b;
+            margin: 15px 0 5px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            word-break: keep-all;
+        }
+
+        .arabic {
+            font-family: 'Amiri', 'Traditional Arabic', 'Times New Roman', serif;
+            font-size: 2rem;
+            color: #2c6e58;
+            margin: 20px 0 10px;
+            line-height: 1.4;
+            font-weight: 500;
+            background: #fef7e0;
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 60px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .greeting {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #b95f1a;
+            margin: 15px 0;
+        }
+
+        .message {
+            font-size: 1.1rem;
+            color: #2c3e2f;
+            line-height: 1.6;
+            margin: 20px 0 25px;
+            padding: 0 8px;
+            font-weight: 500;
+        }
+
+        /* Tombol Ucapan Interaktif */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0 10px;
+        }
+
+        .btn {
+            background: #f0c45a;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2d5a42;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: inherit;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn i {
+            font-style: normal;
+            font-size: 1.2rem;
+        }
+
+        .btn:hover {
+            background: #f8d87a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-secondary {
+            background: #d4b87a;
+            color: #2c4a35;
+        }
+
+        .btn-secondary:hover {
+            background: #e2c88f;
+        }
+
+        /* Ucapan Dinamis */
+        .dynamic-msg {
+            background: #fef3db;
+            border-radius: 40px;
+            padding: 18px 15px;
+            margin: 25px 0 15px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #9b5e2c;
+            border-left: 6px solid #f3b33d;
+            transition: all 0.3s;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: #8aa78f;
+            border-top: 1px solid #ece3ce;
+            padding-top: 20px;
+        }
+
+        /* Animasi kembang api sederhana */
+        .firework {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #ffc107, #ff7e05);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            animation: explode 1s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px 18px 35px;
+            }
+            h1 {
+                font-size: 1.7rem;
+            }
+            .arabic {
+                font-size: 1.5rem;
+                padding: 8px 16px;
+            }
+            .greeting {
+                font-size: 1.3rem;
+            }
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+            .ketupat {
+                width: 40px;
+                height: 40px;
+            }
+            .ketupat:nth-child(2) {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="bg-pattern"></div>
+<div class="card">
+    <div class="ketupat-deco">
+        <div class="ketupat"></div>
+        <div class="ketupat"></div>
+        <div class="ketupat"></div>
+    </div>
+
+    <div class="moon-star">
+        ☪️🌙✨
+    </div>
+
+    <h1>Selamat Hari Raya</h1>
+    <h1 style="font-size:2rem; margin-top:-5px;">Idul Fitri 1446 H</h1>
+
+    <div class="arabic">
+        تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ
+    </div>
+    <div class="greeting">
+        Mohon Maaf Lahir dan Batin
+    </div>
+
+    <div class="message">
+        ✨ Semoga kebahagiaan, ketulusan, dan keberkahan menyertai langkah kita semua. ✨
+    </div>
+
+    <div class="button-group">
+        <button class="btn" id="specialBtn">🌸 Ucapan Spesial 🌸</button>
+        <button class="btn btn-secondary" id="fireworkBtn">🎆 Pancarkan Doa 🎆</button>
+    </div>
+
+    <div class="dynamic-msg" id="dynamicMsg">
+        Klik tombol untuk menerima ucapan hangat...
+    </div>
+
+    <div class="footer">
+        🌙 Mohon maaf lahir dan batin • Semoga fitri kembali 🌙
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Koleksi ucapan spesial
+        const quotes = [
+            "🌼 Semoga hati kita kembali suci seperti bayi yang baru lahir. Selamat Idul Fitri! 🌼",
+            "🍃 Mohon maaf atas segala khilaf dan salah. Selamat merayakan kemenangan! 🍃",
+            "🌟 Taqabbalallahu minna wa minkum, semoga Allah menerima amal ibadah kita. 🌟",
+            "🏮 Kemenangan sejati adalah mampu menahan amarah dan memberi maaf. Selamat Idul Fitri! 🏮",
+            "💚 Dengan tulus saya ucapkan: Selamat Idul Fitri, mohon maaf lahir dan batin. 💚",
+            "✨ Semoga rezeki berlimpah, keluarga bahagia, dan hati selalu lapang menerima rahmat-Nya. ✨",
+            "🌙 Fitri berarti kembali pada kesucian. Selamat merayakan hari nan fitri, sahabat! 🌙",
+            "🌸 Maafkan segala kesalahan yang disengaja maupun tidak. Selamat Idul Fitri, penuh cinta. 🌸"
+        ];
+
+        const specialBtn = document.getElementById('specialBtn');
+        const fireworkBtn = document.getElementById('fireworkBtn');
+        const dynamicMsgDiv = document.getElementById('dynamicMsg');
+
+        // Fungsi menampilkan pesan acak dengan animasi
+        function showRandomMessage() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const selectedQuote = quotes[randomIndex];
+            dynamicMsgDiv.style.opacity = '0';
+            setTimeout(() => {
+                dynamicMsgDiv.innerHTML = selectedQuote;
+                dynamicMsgDiv.style.opacity = '1';
+                dynamicMsgDiv.style.transform = 'scale(1.01)';
+                setTimeout(() => {
+                    dynamicMsgDiv.style.transform = 'scale(1)';
+                }, 200);
+            }, 150);
+            dynamicMsgDiv.style.transition = 'opacity 0.15s, transform 0.2s';
+        }
+
+        // Efek kembang api + pesan doa
+        function createFirework(x, y) {
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            firework.style.left = x + 'px';
+            firework.style.top = y + 'px';
+            // Warna random cerah
+            const hue = Math.random() * 360;
+            firework.style.background = `radial-gradient(circle, hsl(${hue}, 100%, 65%), hsl(${hue}, 90%, 50%))`;
+            document.body.appendChild(firework);
+            setTimeout(() => {
+                firework.remove();
+            }, 900);
+        }
+
+        function burstFireworksAround() {
+            // Buat beberapa titik ledakan di area tengah layar
+            const viewWidth = window.innerWidth;
+            const viewHeight = window.innerHeight;
+            const centerX = viewWidth / 2;
+            const centerY = viewHeight / 2;
+
+            for (let i = 0; i < 28; i++) {
+                const offsetX = (Math.random() - 0.5) * 280;
+                const offsetY = (Math.random() - 0.5) * 200;
+                let x = centerX + offsetX;
+                let y = centerY + offsetY - 30;
+                // batasi di dalam viewport
+                x = Math.min(Math.max(x, 20), viewWidth - 20);
+                y = Math.min(Math.max(y, 20), viewHeight - 20);
+                setTimeout(() => {
+                    createFirework(x, y);
+                }, i * 60);
+            }
+            // getaran doa & pesan meriah
+            dynamicMsgDiv.innerHTML = "🎇💖 Subhanallah, semoga berkah Idul Fitri memancar dalam setiap doa! 💖🎇";
+            dynamicMsgDiv.style.opacity = '0';
+            setTimeout(() => {
+                dynamicMsgDiv.style.opacity = '1';
+                dynamicMsgDiv.style.backgroundColor = '#fff2df';
+                dynamicMsgDiv.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    dynamicMsgDiv.style.transform = 'scale(1)';
+                }, 300);
+            }, 100);
+            // reset warna background setelah 3 detik
+            setTimeout(() => {
+                if (dynamicMsgDiv) dynamicMsgDiv.style.backgroundColor = '#fef3db';
+            }, 2000);
+        }
+
+        // event handler untuk tombol spesial
+        specialBtn.addEventListener('click', () => {
+            showRandomMessage();
+            // efek micro getar di tombol
+            specialBtn.style.transform = 'scale(0.96)';
+            setTimeout(() => {
+                specialBtn.style.transform = '';
+            }, 150);
+        });
+
+        // event handler untuk tombol kembang api
+        fireworkBtn.addEventListener('click', () => {
+            burstFireworksAround();
+            fireworkBtn.style.transform = 'scale(0.96)';
+            setTimeout(() => {
+                fireworkBtn.style.transform = '';
+            }, 150);
+        });
+
+        // tambahkan efek default saat load pertama: tampilkan pesan sambutan hangat
+        setTimeout(() => {
+            dynamicMsgDiv.innerHTML = "🌷 Klik 'Ucapan Spesial' untuk kata-kata penuh makna. Selamat Idul Fitri! 🌷";
+            dynamicMsgDiv.style.transition = 'all 0.3s';
+        }, 500);
+
+        // animasi kecil ketika load, efek sparkle lembut
+        const moonStar = document.querySelector('.moon-star');
+        if (moonStar) {
+            moonStar.style.animation = 'gentleGlow 2s infinite alternate';
+        }
+    })();
+</script>
+</body>
+</html>
